@@ -72,6 +72,8 @@ public class MessageService extends FirebaseMessagingService {
         // look at the notes in the classroom for help.
 
         if (data.size() > 0) {
+            Log.d("~~", "Message data payload: " + data);
+
             sendNotification(data);
             insertSquawk(data);
         }
@@ -150,9 +152,13 @@ public class MessageService extends FirebaseMessagingService {
 
                 getContentResolver().insert(SquawkProvider.SquawkMessages.CONTENT_URI, newMessage);
 
+                Log.d("~~", newMessage.toString());
+
                 return null;
             }
         };
+
+        insertSquawkTask.execute();
 
     }
 
